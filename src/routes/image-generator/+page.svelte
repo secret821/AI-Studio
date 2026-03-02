@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { toast } from '$lib/stores/toast.svelte';
-	import Tooltip from '$lib/components/Tooltip.svelte';
 	import copy from 'copy-to-clipboard';
-	import { createDialog, melt } from '@melt-ui/svelte';
-	import { fade, fly, scale } from 'svelte/transition';
-	import { flip } from 'svelte/animate';
+	import { createDialog } from '@melt-ui/svelte';
+	import { fade, fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 
 	type ImageTask = {
@@ -21,7 +19,6 @@
 	let images = $state<ImageTask[]>([]);
 	let isProcessing = $state(false);
 	let isDownloading = $state(false);
-	let downloadProgress = $state('');
 	let fileInput: HTMLInputElement;
 
 	// Melt UI Dialog for clear confirmation
@@ -207,17 +204,6 @@
 		}
 	}
 
-	let completedCount = $derived(images.filter(img => img.status === 'completed').length);
-
-	function copyImageUrl(imageUrl: string) {
-		const success = copy(imageUrl);
-		if (success) {
-			toast.success('图片链接已复制到剪贴板');
-		} else {
-			toast.error('复制失败，请重试');
-		}
-	}
-
 	function copyFileName(fileName: string) {
 		const success = copy(fileName);
 		if (success) {
@@ -230,7 +216,7 @@
 
 <!-- 固定工具栏 -->
 <div class="fixed top-14 left-0 right-0 z-40 h-14 bg-white border-b border-gray-200">
-	<div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+	<div class="page-container h-full flex items-center justify-between">
 		<!-- 左侧：标题 -->
 		<h1 class="text-base font-semibold text-gray-900">
 			图片提示词生成器
@@ -240,7 +226,7 @@
 		<div class="flex items-center gap-2">
 			<button
 				onclick={() => fileInput?.click()}
-				class="px-3 py-1.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors"
+				class="control-button control-button-primary"
 			>
 				上传图片
 			</button>
@@ -249,7 +235,7 @@
 				<button
 					onclick={processImages}
 					disabled={isProcessing || images.every(img => img.status !== 'pending')}
-					class="px-3 py-1.5 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+					class="control-button control-button-primary"
 				>
 					{#if isProcessing}
 						<div class="flex items-center gap-1.5">
@@ -266,7 +252,7 @@
 				<button
 					{...$trigger}
 					disabled={isProcessing || isDownloading}
-					class="p-1.5 text-gray-600 hover:bg-gray-100 rounded-md transition-colors disabled:text-gray-300 disabled:hover:bg-transparent"
+					class="inline-flex h-9 w-9 items-center justify-center text-gray-600 hover:bg-gray-100 rounded-lg transition-colors disabled:text-gray-300 disabled:hover:bg-transparent"
 					title="清空所有"
 				>
 					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -322,30 +308,30 @@
 
 <!-- 主内容区域 -->
 <div class="fixed top-28 bottom-0 left-0 right-0 overflow-y-auto bg-gray-50">
-	<div class="max-w-7xl mx-auto px-6 py-6">
+	<div class="page-container py-6">
 		{#if images.length === 0}
 			<!-- 空状态 -->
-			<div class="flex flex-col items-center justify-center py-32 text-center">
-				<div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mb-6">
+			<div class="flex flex-col items-center justify-center py-24 text-center">
+				<div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
 					<svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
 					</svg>
 				</div>
 				<h2 class="text-xl font-semibold text-gray-900 mb-2">上传图片开始</h2>
-				<p class="text-sm text-gray-500 mb-6">AI 将智能分析并生成图片描述提示词</p>
+				<p class="text-sm text-gray-500 mb-5">AI 将智能分析并生成图片描述提示词</p>
 				<button
 					onclick={() => fileInput?.click()}
-					class="px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors"
+					class="control-button control-button-primary"
 				>
 					选择图片
 				</button>
 			</div>
 		{:else}
 			<!-- 图片网格 -->
-			<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+			<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6">
 				{#each images as task (task.id)}
 					<div 
-						class="group relative bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-gray-300 transition-colors"
+						class="group relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-gray-300 transition-colors shadow-sm"
 					>
 					<!-- 删除按钮 -->
 					<button
@@ -359,7 +345,7 @@
 					</button>
 
 					<!-- 文件名显示区域 -->
-					<div class="px-4 pt-4 pb-3 border-b border-gray-100 bg-gray-50">
+					<div class="px-4 py-3 border-b border-gray-100 bg-gray-50">
 						<div class="flex items-center gap-2">
 							<button
 								onclick={() => copyFileName(task.file.name)}
@@ -378,18 +364,18 @@
 
 						<!-- 原图 -->
 						<div class="relative">
-							<img src={task.preview} alt="原图" class="w-full h-60 object-cover" />
+							<img src={task.preview} alt="原图" class="w-full h-56 object-cover" />
 						</div>
 
 						<!-- 生成的图片或状态 -->
-						<div class="p-4 space-y-3">
+						<div class="p-4 space-y-4">
 							{#if task.status === 'analyzing'}
-								<div class="flex flex-col items-center justify-center py-8 text-center">
+								<div class="flex flex-col items-center justify-center py-6 text-center">
 									<div class="w-8 h-8 border-2 border-gray-900 border-t-transparent rounded-full animate-spin mb-3"></div>
 									<p class="text-sm font-medium text-gray-700">分析中...</p>
 								</div>
 							{:else if task.status === 'completed' && task.prompt}
-								<div class="space-y-3">
+								<div class="space-y-4">
 									<!-- 提示词 -->
 									<div class="bg-gray-50 rounded-md p-3 flex items-start justify-between gap-2 border border-gray-200">
 										<div class="flex-1 relative group cursor-help">
@@ -428,7 +414,7 @@
 											href="https://aidp.juejin.cn/agentic/api/v1/tool/text2image?prompt={encodeURIComponent(task.prompt)}"
 											target="_blank"
 											rel="noopener noreferrer"
-											class="flex-1 px-3 py-2 bg-gray-900 text-white text-xs font-medium rounded-md hover:bg-gray-800 transition-colors text-center"
+											class="flex-1 px-3 py-2.5 bg-gray-900 text-white text-xs font-medium rounded-lg hover:bg-gray-800 transition-colors text-center"
 										>
 											跳转生成
 										</a>
@@ -437,7 +423,7 @@
 									<button
 										onclick={() => generateImage(task)}
 										disabled={task.isGeneratingImage}
-										class="px-3 py-2 border border-gray-300 text-gray-700 text-xs font-medium rounded-md hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
+										class="px-3 py-2.5 border border-gray-300 text-gray-700 text-xs font-medium rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
 										title={task.isGeneratingImage ? '生成中...' : '生成图片'}
 									>
 										{#if task.isGeneratingImage}
@@ -459,7 +445,7 @@
 											<img src={task.generatedImageUrl} alt="生成的图片" class="w-full h-auto" />
 											<button
 												onclick={() => task.generatedImageUrl && downloadImage(task.generatedImageUrl, `ai-generated-${task.file.name}`)}
-												class="absolute top-2 right-2 p-1.5 bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
+												class="absolute top-2 right-2 p-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
 												title="下载图片"
 											>
 												<svg class="w-3.5 h-3.5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -470,7 +456,7 @@
 									{/if}
 								</div>
 							{:else if task.status === 'error'}
-								<div class="flex flex-col items-center justify-center py-8 text-center">
+								<div class="flex flex-col items-center justify-center py-6 text-center">
 									<div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center mb-3">
 										<svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -485,7 +471,7 @@
 									</button>
 								</div>
 							{:else}
-								<div class="flex flex-col items-center justify-center py-8 text-center">
+								<div class="flex flex-col items-center justify-center py-6 text-center">
 									<div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-3">
 										<svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />

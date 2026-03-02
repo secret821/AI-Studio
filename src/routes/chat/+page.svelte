@@ -231,12 +231,12 @@
 	<!-- 消息区域 -->
 	<div 
 		bind:this={messagesContainer}
-		class="flex-1 overflow-y-auto px-4 py-8 pb-24"
+		class="flex-1 overflow-y-auto px-4 sm:px-6 py-6 pb-20"
 	>
 		<div class="max-w-4xl mx-auto h-full flex flex-col">
 			{#if messages.length === 0}
-				<div class="flex-1 flex flex-col items-center justify-center text-center px-4">
-					<div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mb-6">
+				<div class="flex-1 flex flex-col items-center justify-center text-center px-4 pb-8">
+					<div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
 						<svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
 						</svg>
@@ -245,19 +245,19 @@
 					<p class="text-sm text-gray-500">输入消息，与 AI 助手开始交流</p>
 				</div>
 			{:else}
-				<div class="space-y-6">
+				<div class="space-y-5">
 				{#each messages as message (message.id)}
 					<div class="flex {message.role === 'user' ? 'justify-end' : 'justify-start'}">
-						<div class="flex items-start gap-2 max-w-[80%]">
+						<div class="flex items-start gap-2.5 max-w-[84%]">
 							{#if message.role === 'assistant'}
-								<div class="w-7 h-7 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
+								<div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
 									<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
 									</svg>
 								</div>
 							{/if}
 							
-							<div class="rounded-lg px-4 py-2.5 text-sm {message.role === 'user'
+							<div class="rounded-xl px-3.5 py-2.5 text-sm {message.role === 'user'
 									? 'bg-gray-900 text-white'
 									: 'bg-gray-100 text-gray-900'}">
 								{#if message.imageUrl}
@@ -275,7 +275,7 @@
 							</div>
 							
 							{#if message.role === 'user'}
-								<div class="w-7 h-7 bg-gray-600 rounded-lg flex items-center justify-center flex-shrink-0">
+								<div class="w-8 h-8 bg-gray-600 rounded-lg flex items-center justify-center flex-shrink-0">
 									<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
 									</svg>
@@ -287,13 +287,13 @@
 				
 				{#if isLoading}
 					<div class="flex justify-start">
-						<div class="flex items-start gap-2 max-w-[80%]">
-							<div class="w-7 h-7 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
+						<div class="flex items-start gap-2.5 max-w-[84%]">
+							<div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
 								<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
 								</svg>
 							</div>
-							<div class="rounded-lg px-4 py-2.5 bg-gray-100 text-sm">
+							<div class="rounded-xl px-3.5 py-2.5 bg-gray-100 text-sm">
 								<div class="flex items-center gap-2">
 									<div class="flex gap-1">
 										<div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
@@ -313,7 +313,7 @@
 
 	<!-- 吸底输入框 -->
 	<div class="bg-white border-t border-gray-200">
-		<div class="max-w-3xl mx-auto px-4 py-4">
+		<div class="max-w-4xl mx-auto px-4 sm:px-6 py-3">
 			<!-- 隐藏的文件输入 -->
 			<input
 				type="file"
@@ -325,11 +325,11 @@
 			
 			<!-- 模型选择器 -->
 			{#if !isLoadingConfig && modelStore.availableModels.length > 0}
-				<div class="mb-3 relative model-selector-container">
+				<div class="mb-2 relative model-selector-container">
 					<button
 						type="button"
 						onclick={() => showModelSelector = !showModelSelector}
-						class="flex items-center gap-2 px-4 py-2 bg-gray-50 hover:bg-gray-100 border border-gray-300 rounded-lg transition-colors text-sm w-full"
+						class="flex items-center gap-2 px-3.5 py-2 bg-gray-50 hover:bg-gray-100 border border-gray-300 rounded-lg transition-colors text-sm w-full"
 					>
 						<svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
@@ -398,7 +398,7 @@
 			{#if selectedFile}
 				{#if selectedFile.type.startsWith('image/')}
 					<!-- 图片预览 -->
-					<div class="mb-3 relative inline-block">
+					<div class="mb-2 relative inline-block">
 						<img src={selectedImage} alt="预览" class="max-w-xs max-h-40 rounded-lg border border-gray-300" />
 						<button
 							type="button"
@@ -413,7 +413,7 @@
 					</div>
 				{:else}
 					<!-- 文档文件名显示 -->
-					<div class="mb-3 flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-lg">
+					<div class="mb-2 flex items-center gap-2 px-3.5 py-2 bg-blue-50 border border-blue-200 rounded-lg">
 						<svg class="w-5 h-5 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
 						</svg>
@@ -434,12 +434,12 @@
 
 			<form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }} class="relative">
 				<!-- 输入框容器 -->
-				<div class="flex items-end gap-2 bg-white rounded-3xl border border-gray-300 shadow-sm hover:shadow-md transition-shadow px-4 py-3">
+				<div class="flex items-end gap-2 bg-white rounded-2xl border border-gray-300 shadow-sm hover:shadow-md transition-shadow px-3.5 py-2.5">
 					<!-- 左侧添加按钮 -->
 					<button
 						type="button"
 						onclick={() => fileInput?.click()}
-						class="flex-shrink-0 p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors {modelStore.currentModel && !modelStore.currentModel.supportsImage && !modelStore.currentModel.supportsDocument ? 'opacity-50 cursor-not-allowed' : ''}"
+						class="flex-shrink-0 p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors {modelStore.currentModel && !modelStore.currentModel.supportsImage && !modelStore.currentModel.supportsDocument ? 'opacity-50 cursor-not-allowed' : ''}"
 						title={modelStore.currentModel 
 							? (modelStore.currentModel.supportsImage || modelStore.currentModel.supportsDocument
 								? `上传文件（${modelStore.currentModel.name}）${modelStore.currentModel.supportsImage ? '\n✓ 图片' : ''}${modelStore.currentModel.supportsDocument ? '\n✓ 文档' : ''}` 
@@ -459,7 +459,7 @@
 						disabled={isLoading}
 						placeholder="有问题，尽管问"
 						rows="1"
-						class="flex-1 resize-none bg-transparent text-[15px] text-gray-900 placeholder:text-gray-400
+						class="flex-1 resize-none bg-transparent text-sm sm:text-[15px] text-gray-900 placeholder:text-gray-400
 							focus:outline-none disabled:text-gray-400 max-h-32 py-1"
 					></textarea>
 
@@ -470,7 +470,7 @@
 						<button
 							type="submit"
 							disabled={isLoading || !input.trim()}
-							class="p-1.5 bg-black text-white rounded-full hover:bg-gray-800 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
+							class="p-2 bg-black text-white rounded-full hover:bg-gray-800 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
 							title="发送"
 						>
 							{#if isLoading}
@@ -488,7 +488,7 @@
 			</form>
 
 			<!-- 底部提示 -->
-			<div class="text-xs text-gray-500 text-center mt-3 space-y-1">
+			<div class="text-xs text-gray-500 text-center mt-2 space-y-1">
 				<p>AI 也可能会犯错。请核查重要信息。</p>
 				{#if modelStore.currentModel}
 					<p class="text-gray-400">

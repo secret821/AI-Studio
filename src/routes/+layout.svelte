@@ -2,12 +2,10 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 	import Toast from '$lib/components/Toast.svelte';
-	import { fade } from 'svelte/transition';
 	
 	// 判断当前路由
 	$: isChat = $page.url.pathname === '/chat';
 	$: isImageGenerator = $page.url.pathname === '/image-generator';
-	$: isHome = $page.url.pathname === '/';
 </script>
 
 <!-- Toast 组件（全局） -->
@@ -16,7 +14,7 @@
 <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
 	<!-- 吸顶导航栏 - 更简洁现代的设计 -->
 	<nav class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
-		<div class="max-w-7xl mx-auto px-6">
+		<div class="page-container">
 			<div class="flex items-center justify-between h-14">
 				<!-- Logo -->
 				<a 
