@@ -93,7 +93,6 @@
 					<div class="flex flex-wrap justify-center gap-2 text-xs sm:text-sm mb-5">
 						<span class="px-3 py-1.5 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-700 rounded-full font-medium">📸 图片分析</span>
 						<span class="px-3 py-1.5 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-700 rounded-full font-medium">✨ AI 提示词</span>
-						<span class="px-3 py-1.5 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-700 rounded-full font-medium">🔗 掘金集成</span>
 					</div>
 					
 					<div class="text-purple-600 font-semibold group-hover:translate-x-1 transition-transform duration-300 inline-flex items-center text-base">
@@ -104,57 +103,6 @@
 					</div>
 				</div>
 			</a>
-		</div>
-
-		<!-- 底部特性说明 -->
-		<div 
-			in:fade={{ duration: 600, delay: 800 }}
-			class="mt-12 grid md:grid-cols-3 gap-6 text-left max-w-6xl mx-auto"
-		>
-			<div 
-				in:fly={{ y: 30, duration: 500, delay: 900, easing: cubicOut }}
-				class="group flex items-start gap-3 p-5 rounded-2xl hover:bg-white/80 transition-all duration-300 hover:shadow-md"
-			>
-				<div class="w-10 h-10 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
-					<svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-					</svg>
-				</div>
-				<div>
-					<h3 class="font-bold text-gray-800 mb-1.5 text-base">完全免费</h3>
-					<p class="text-gray-600 leading-relaxed text-sm">支持多种免费 AI 模型，无需付费即可使用</p>
-				</div>
-			</div>
-			
-			<div 
-				in:fly={{ y: 30, duration: 500, delay: 1000, easing: cubicOut }}
-				class="group flex items-start gap-3 p-5 rounded-2xl hover:bg-white/80 transition-all duration-300 hover:shadow-md"
-			>
-				<div class="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
-					<svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-					</svg>
-				</div>
-				<div>
-					<h3 class="font-bold text-gray-800 mb-1.5 text-base">极速响应</h3>
-					<p class="text-gray-600 leading-relaxed text-sm">使用 Groq 等高速 AI 服务，响应迅速</p>
-				</div>
-			</div>
-			
-			<div 
-				in:fly={{ y: 30, duration: 500, delay: 1100, easing: cubicOut }}
-				class="group flex items-start gap-3 p-5 rounded-2xl hover:bg-white/80 transition-all duration-300 hover:shadow-md"
-			>
-				<div class="w-10 h-10 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
-					<svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-					</svg>
-				</div>
-				<div>
-					<h3 class="font-bold text-gray-800 mb-1.5 text-base">灵活配置</h3>
-					<p class="text-gray-600 leading-relaxed text-sm">支持多种 AI 模型，可随时切换</p>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>

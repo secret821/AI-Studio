@@ -39,6 +39,15 @@ body {
 	.control-button-secondary {
 		@apply border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed;
 	}
+
+	.mobile-scroll-x {
+		@apply overflow-x-auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.mobile-data-table {
+		@apply w-full min-w-[720px] text-sm whitespace-nowrap;
+	}
 }
 
 /* 自定义滚动条 */

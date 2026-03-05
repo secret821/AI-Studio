@@ -41,7 +41,7 @@
 			out:fade={{ duration: 150 }}
 			class="pointer-events-auto"
 		>
-			<div class="rounded-lg shadow-2xl overflow-hidden min-w-[300px] max-w-md backdrop-blur-sm border border-white/20">
+			<div class="rounded-lg shadow-2xl overflow-hidden min-w-[260px] sm:min-w-[300px] max-w-[calc(100vw-2rem)] sm:max-w-md backdrop-blur-sm border border-white/20">
 				<div class="{getToastStyles(t.type)} px-4 py-3">
 					<div class="flex items-center gap-3">
 						<div class="flex-shrink-0">

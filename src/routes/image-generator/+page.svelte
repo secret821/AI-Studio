@@ -216,17 +216,17 @@
 
 <!-- 固定工具栏 -->
 <div class="fixed top-14 left-0 right-0 z-40 h-14 bg-white border-b border-gray-200">
-	<div class="page-container h-full flex items-center justify-between">
+	<div class="page-container h-full flex items-center gap-3 overflow-hidden">
 		<!-- 左侧：标题 -->
-		<h1 class="text-base font-semibold text-gray-900">
+		<h1 class="hidden sm:block text-base font-semibold text-gray-900 shrink-0">
 			图片提示词生成器
 		</h1>
 
 		<!-- 右侧：操作按钮 -->
-		<div class="flex items-center gap-2">
+		<div class="flex min-w-0 flex-1 items-center justify-end gap-2 overflow-x-auto">
 			<button
 				onclick={() => fileInput?.click()}
-				class="control-button control-button-primary"
+				class="control-button control-button-primary shrink-0"
 			>
 				上传图片
 			</button>
@@ -235,7 +235,7 @@
 				<button
 					onclick={processImages}
 					disabled={isProcessing || images.every(img => img.status !== 'pending')}
-					class="control-button control-button-primary"
+					class="control-button control-button-primary shrink-0"
 				>
 					{#if isProcessing}
 						<div class="flex items-center gap-1.5">
@@ -252,7 +252,7 @@
 				<button
 					{...$trigger}
 					disabled={isProcessing || isDownloading}
-					class="inline-flex h-9 w-9 items-center justify-center text-gray-600 hover:bg-gray-100 rounded-lg transition-colors disabled:text-gray-300 disabled:hover:bg-transparent"
+					class="inline-flex h-9 w-9 shrink-0 items-center justify-center text-gray-600 hover:bg-gray-100 rounded-lg transition-colors disabled:text-gray-300 disabled:hover:bg-transparent"
 					title="清空所有"
 				>
 					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
